@@ -8,7 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="4.SpringMvcControllersWithRequestParam" />
         <module name="3.SpringMvcControllersIntro" />
-        <module name="6.SpringMvcRestCRUD" />
+        <module name="7.SpringMvcRestCRUDReadCreate" />
         <module name="SpringMVCApp1" />
         <module name="2.SpringMVCAppJavaConfig" />
         <module name="5.SpringMvcControllersWithModel" />
