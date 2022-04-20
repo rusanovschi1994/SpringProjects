@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            border: 0px solid #000000;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        tbody>:nth-child(8) {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h2>Registration succes</h2>
+<br>
+<table>
+    <tbody>
+    <tr>
+        <td><strong>Name:</strong></td>
+        <td><span th:text="${person.getName()}"></span></td>
+    </tr>
+    <tr>
+        <td><strong>Age:</strong></td>
+        <td><span th:text="${person.getAge()}"></span></td>
+    </tr>
+    <tr>
+        <td><strong>Gender:</strong></td>
+        <td><span th:text="Default"></span></td>
+    </tr>
+    <tr>
+        <td><strong>Email:</strong></td>
+        <td><span th:text="${person.getEmail()}"></span></td>
+    </tr>
+    <tr>
+        <td><strong>Phone:</strong></td>
+        <td><span th:text="${person.getPhone()}"></span></td>
+    </tr>
+    <tr>
+        <td colspan="2">&nbsp;<a th:href="@{/people/new}"
+                                 class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Add
+            new customer
+        </a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

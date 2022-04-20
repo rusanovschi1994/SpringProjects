@@ -24,9 +24,9 @@ public class PeopleController {
     }
 
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("people", personDAO.index());
-        return "people/index";
+    public String showAll(Model model) {
+        model.addAttribute("people", personDAO.showAll());
+        return "people/showAll";
     }
 
     @GetMapping("/{id}")
@@ -48,7 +48,7 @@ public class PeopleController {
             return "people/new";
 
         personDAO.save(person);
-        return "redirect:/people";
+        return "people/registrationResult";
     }
 
     @GetMapping("/{id}/edit")

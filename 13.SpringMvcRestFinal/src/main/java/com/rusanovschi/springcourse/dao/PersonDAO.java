@@ -23,7 +23,7 @@ public class PersonDAO {
     }
 
 
-    public List<Person> index() {
+    public List<Person> showAll() {
         return jdbcTemplate.query("SELECT * FROM Person", new PersonMapper());
     }
 
@@ -35,13 +35,13 @@ public class PersonDAO {
 
     public void save(Person person) {
 
-        jdbcTemplate.update("INSERT INTO Person VALUES (default , ?, ?, ?)", person.getName(), person.getAge(), person.getEmail());
+        jdbcTemplate.update("INSERT INTO Person VALUES (default , ?, ?, ?, ?)", person.getName(), person.getAge(), person.getEmail(), person.getPhone());
     }
 
     public void update(int id, Person updatedPerson) {
 
-        jdbcTemplate.update("UPDATE Person SET name=?, age=?, email=? WHERE id=?",updatedPerson.getName(),
-                updatedPerson.getAge(), updatedPerson.getEmail(), id);
+        jdbcTemplate.update("UPDATE Person SET name=?, age=?, email=?, phone=? WHERE id=?",updatedPerson.getName(),
+                updatedPerson.getAge(), updatedPerson.getEmail(), updatedPerson.getPhone(), id);
     }
 
     public void delete(int id) {

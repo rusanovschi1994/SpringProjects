@@ -2,25 +2,57 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update person</title>
+    <title>Update Customer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
 <body>
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h2>Update Customer</h2>
+            <form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+                <div class="form-row">
+                    <div class="col-md-6 form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" th:field="*{name}" id="name"/>
+                        <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="age">Age</label>
+                        <input type="number" step="any" class="form-control" th:field="*{age}" id="age"/>
+                        <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" th:field="*{email}" id="email"/>
+                        <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="email">Phone</label>
+                        <input type="text" class="form-control" th:field="*{phone}" id="phone"/>
+                        <div style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone error</div>
+                    </div>
 
-<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
-    <label for="name">Enter name: </label>
-    <input type="text" th:field="*{name}" id="name"/>
-    <div style="color:red;" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
-    <br/>
-    <label for="age">Enter age</label>
-    <input type="text" th:field="*{age}" id="age"/>
-    <div style="color:red;" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
-    <br/>
-    <label for="email">Enter email</label>
-    <input type="text" th:field="*{email}" id="email"/>
-    <div style="color:red;" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
-    <br/>
-    <input type="submit" value="Update!"/>
-</form>
-
+                    <div class="col-md-6 form-group">
+                        <strong>Gen</strong>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="option1" value="Male">
+                            <label class="form-check-label" for="option1">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio"  id="option2" value="Female">
+                            <label class="form-check-label" for="option2">Female</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-3">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
