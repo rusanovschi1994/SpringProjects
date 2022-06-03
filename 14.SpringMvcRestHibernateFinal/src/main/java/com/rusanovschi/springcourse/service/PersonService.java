@@ -1,10 +1,11 @@
-package com.rusanovschi.springcourse.dao;
+package com.rusanovschi.springcourse.service;
+
 
 import com.rusanovschi.springcourse.entity.Person;
 
 import java.util.List;
 
-public interface PersonDAO {
+public interface PersonService {
 
     public List<Person> getAllPeople();
 }

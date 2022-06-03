@@ -1,13 +1,11 @@
 package com.rusanovschi.springcourse.controllers;
 
-import com.rusanovschi.springcourse.dao.PersonDAO;
+import com.rusanovschi.springcourse.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.rusanovschi.springcourse.entity.Person;
-import javax.validation.Valid;
 
 /**
  * @author Rusanovschi Cristian
@@ -16,18 +14,18 @@ import javax.validation.Valid;
 @RequestMapping("/people")
 public class PeopleController {
 
-   private final PersonDAO personDAO;
+    private final PersonService personService;
 
-   @Autowired
-    public PeopleController(PersonDAO personDAO) {
-        this.personDAO = personDAO;
+    @Autowired
+    public PeopleController(PersonService personService) {
+        this.personService = personService;
     }
 
     @GetMapping()
     public String showAll(Model model) {
 
-        model.addAttribute("people", personDAO.showAll());
-        return "people/test";
+        model.addAttribute("people", personService.getAllPeople());
+        return "people/showAll";
     }
 
 //    @GetMapping("/{id}")
