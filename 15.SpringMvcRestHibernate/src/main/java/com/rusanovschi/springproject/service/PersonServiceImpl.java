@@ -31,4 +31,17 @@ public class PersonServiceImpl implements PersonService{
 
         personDAO.savePerson(person);
     }
+
+    @Override
+    @Transactional
+    public Person getPerson(int id) {
+        return personDAO.getPerson(id);
+    }
+
+    @Override
+    @Transactional
+    public void updatePerson(int id, Person updatedPerson) {
+
+        personDAO.updatePerson(id, updatedPerson);
+    }
 }

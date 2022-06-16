@@ -52,23 +52,23 @@ public class PeopleController {
         personService.savePerson(person);
         return "people/registrationResult";
     }
-//
-//    @GetMapping("/{id}/edit")
-//    public String edit(Model model, @PathVariable("id") int id) {
-//        model.addAttribute("person", personDAOImpl.show(id));
-//        return "people/edit";
-//    }
-//
-//    @PatchMapping("/{id}")
-//    public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult, @PathVariable("id") int id) {
-//
-//        if(bindingResult.hasErrors()){
-//            return "people/edit";
-//        }
-//
-//        personDAOImpl.update(id, person);
-//        return "redirect:/people";
-//    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("person", personService.getPerson(id));
+        return "people/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult, @PathVariable("id") int id) {
+
+        if(bindingResult.hasErrors()){
+            return "people/edit";
+        }
+
+        personService.updatePerson(id, person);
+        return "redirect:/people";
+    }
 //
 //    @DeleteMapping("/{id}")
 //    public String delete(@PathVariable("id") int id) {

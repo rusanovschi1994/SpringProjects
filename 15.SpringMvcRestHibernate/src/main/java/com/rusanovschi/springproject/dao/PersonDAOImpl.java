@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -35,7 +36,27 @@ public class PersonDAOImpl implements PersonDAO{
     public void savePerson(Person person) {
 
         Session session = sessionFactory.getCurrentSession();
-        session.save(person);
+        session.saveOrUpdate(person);
+    }
+
+    @Override
+    public Person getPerson(int id) {
+
+        Session session = sessionFactory.getCurrentSession();
+        Person person = session.get(Person.class, id);
+        return person;
+    }
+
+    @Override
+    public void updatePerson(int id, Person updatedPerson) {
+
+        Session session = sessionFactory.getCurrentSession();
+        Person personTobeUpdated = session.get(Person.class, id);
+
+        personTobeUpdated.setName(updatedPerson.getName());
+        personTobeUpdated.setAge(updatedPerson.getAge());
+        personTobeUpdated.setEmail(updatedPerson.getEmail());
+        personTobeUpdated.setPhone(updatedPerson.getPhone());
     }
 
 //    public Person show(int id) {
