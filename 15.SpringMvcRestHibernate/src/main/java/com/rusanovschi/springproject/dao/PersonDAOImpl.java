@@ -59,6 +59,13 @@ public class PersonDAOImpl implements PersonDAO{
         personTobeUpdated.setPhone(updatedPerson.getPhone());
     }
 
+    @Override
+    public void deletePerson(int id) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.remove(session.get(Person.class, id));
+    }
+
 //    public Person show(int id) {
 //
 //       return jdbcTemplate.query("SELECT * FROM Person WHERE id = ?", new Object[]{id}, new PersonMapper())

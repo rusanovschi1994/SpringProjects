@@ -31,11 +31,11 @@ public class PeopleController {
         return "people/showAll";
     }
 
-//    @GetMapping("/{id}")
-//    public String show(@PathVariable("id") int id, Model model) {
-//        model.addAttribute("person", personDAOImpl.show(id));
-//        return "people/show";
-//    }
+    @GetMapping("/{id}")
+    public String show(@PathVariable("id") int id, Model model) {
+        model.addAttribute("person", personService.getPerson(id));
+        return "people/show";
+    }
 
     @GetMapping("/new")
     public String newPerson(@ModelAttribute("person") Person person) {
@@ -69,10 +69,11 @@ public class PeopleController {
         personService.updatePerson(id, person);
         return "redirect:/people";
     }
-//
-//    @DeleteMapping("/{id}")
-//    public String delete(@PathVariable("id") int id) {
-//        personDAOImpl.delete(id);
-//        return "redirect:/people";
-//    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id){
+
+        personService.deletePerson(id);
+        return "redirect:/people";
+    }
 }

@@ -13,4 +13,6 @@ public interface PersonDAO {
     public Person getPerson(int id);
 
     public void updatePerson(int id, Person person);
+
+    public void deletePerson(int id);
 }

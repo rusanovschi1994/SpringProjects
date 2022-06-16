@@ -9,7 +9,6 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model){
 
-        System.out.println("starting index() method...");
         return "static/index";
     }
 }

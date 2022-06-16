@@ -12,4 +12,5 @@ public interface PersonService {
     public void savePerson(Person person);
     public Person getPerson(int id);
     public void updatePerson(int id, Person updatedPerson);
+    public void deletePerson(int id);
 }
