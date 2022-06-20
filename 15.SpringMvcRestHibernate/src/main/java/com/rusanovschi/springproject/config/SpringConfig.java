@@ -31,7 +31,7 @@ import java.util.Properties;
 }
 
 //@Configuration
-//@ComponentScan("com.rusanovschi.springproject")
+//@ComponentScan("com.rusanovschi.springpect"roj)
 //@EnableWebMvc
 //public class SpringConfig implements WebMvcConfigurer {
 //
