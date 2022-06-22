@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="spring-security-app:war exploded">
+    <output-path>$PROJECT_DIR$/SpringSecurityMvc/target/spring-security-app</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>spring-security-app</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="spring-security-app" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/SpringSecurityMvc/target/spring-security-app/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="spring-security-app/web/Web" />
+    </root>
+  </artifact>
+</component>
