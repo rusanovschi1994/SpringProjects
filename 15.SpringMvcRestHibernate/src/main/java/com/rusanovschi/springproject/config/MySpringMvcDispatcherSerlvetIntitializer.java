@@ -1,6 +1,8 @@
 package com.rusanovschi.springproject.config;
 
 
+import com.rusanovschi.springproject.config.security.SecurityConfig;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -15,9 +17,7 @@ import java.util.EnumSet;
  * @author Rusanovschi Cristian
  */
 
-// public class MySpringMvcDispatcherSerlvetIntitializer {
-//}
-
+//@Import({SecurityConfig.class})
 public class MySpringMvcDispatcherSerlvetIntitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
