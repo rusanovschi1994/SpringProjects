@@ -28,7 +28,7 @@ public class PeopleController {
     public String showAll(Model model) {
 
         model.addAttribute("people", personService.getAllPeople());
-        return "views/people/showAll.html";
+        return "people/showAll";
     }
 
     @GetMapping("/{id}")
