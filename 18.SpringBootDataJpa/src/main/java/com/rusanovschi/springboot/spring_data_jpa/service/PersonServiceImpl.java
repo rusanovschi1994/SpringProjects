@@ -43,6 +43,9 @@ public class PersonServiceImpl implements PersonService{
 
     @Override
     public void updatePerson(int id, Person updatedPerson) {
+
+//        Person person = personRepository.findById(per)
+        personRepository.save(updatedPerson);
 //
 //        personRepository.updatePerson(id, updatedPerson);
     }

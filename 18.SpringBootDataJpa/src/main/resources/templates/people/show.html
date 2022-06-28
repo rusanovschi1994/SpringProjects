@@ -16,8 +16,7 @@
 
 <!--<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">-->
 <!--    <input type="submit" value="Delete"/>-->
-<form method="post" th:action="@{/people/{id}(id=${person.getId()})}">
-    <input type="hidden" name="_method" value="DELETE"/>
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
         <input type="submit" value="Delete"/>
 
 </form>
