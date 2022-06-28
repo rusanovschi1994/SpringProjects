@@ -44,15 +44,19 @@ public class PersonServiceImpl implements PersonService{
     @Override
     public void updatePerson(int id, Person updatedPerson) {
 
-//        Person person = personRepository.findById(per)
         personRepository.save(updatedPerson);
-//
-//        personRepository.updatePerson(id, updatedPerson);
     }
 
     @Override
     public void deletePerson(int id) {
 
         personRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Person> findAllByEmail(String email) {
+
+        List<Person> findAllByEmail = personRepository.findAllByEmail(email);
+        return findAllByEmail;
     }
 }
