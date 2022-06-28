@@ -13,9 +13,9 @@ public class IndexController {
         return "static/index";
    }
 
-//    @GetMapping("/login")
-//    public String login(){
-//
-//        return "views/authentication/login.html";
-//    }
+    @GetMapping("/login")
+    public String login(){
+
+        return "authentication/login";
+    }
 }
