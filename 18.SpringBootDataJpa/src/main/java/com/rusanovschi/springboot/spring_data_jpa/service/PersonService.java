@@ -11,4 +11,6 @@ public interface PersonService {
     public Person getPerson(int id);
     public void updatePerson(int id, Person updatedPerson);
     public void deletePerson(int id);
+
+    public List<Person> findAllByEmail(String email);
 }

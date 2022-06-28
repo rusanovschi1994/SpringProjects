@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author Rusanovschi Cristian
@@ -75,5 +76,13 @@ public class PeopleController {
 
         personService.deletePerson(id);
         return "redirect:/people";
+    }
+
+    @GetMapping("/email/{email}")
+    public String showAllPersonByEmail(@PathVariable String email, Model model){
+
+        //List<Person> people = personService.findAllByEmail(email);
+        model.addAttribute("people", personService.findAllByEmail(email));
+        return "people/showAll";
     }
 }
