@@ -13,9 +13,9 @@ public class IndexController {
         return "static/index";
    }
 
-    @GetMapping("/login")
-    public String login(){
-
-        return "authentication/login";
-    }
+//    @GetMapping("/login")
+//    public String login(){
+//
+//        return "authentication/login2";
+//    }
 }
