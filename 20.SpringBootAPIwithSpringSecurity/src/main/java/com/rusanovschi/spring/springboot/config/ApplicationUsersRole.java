@@ -6,11 +6,12 @@ import java.util.Set;
 
 public enum ApplicationUsersRole {
 
-    ADMIN(Sets.newHashSet()),
-    STUDENT(Sets.newHashSet(ApplicationUserPermission.PERSON_READ,
-                            ApplicationUserPermission.PERSON_WRITE,
-                            ApplicationUserPermission.COURSE_READ,
-                            ApplicationUserPermission.COURSE_WRITE));
+    STUDENT(Sets.newHashSet()),
+    ADMIN(Sets.newHashSet(ApplicationUserPermission.PERSON_READ,
+                            ApplicationUserPermission.PERSON_WRITE)),
+
+    ADMINTRAINEE(Sets.newHashSet(ApplicationUserPermission.PERSON_READ));
+
 
     private final Set<ApplicationUserPermission> permissions;
 

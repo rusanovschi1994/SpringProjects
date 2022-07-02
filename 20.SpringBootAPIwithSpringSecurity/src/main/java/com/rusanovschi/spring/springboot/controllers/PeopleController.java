@@ -39,13 +39,13 @@ public class PeopleController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deletePerson(@PathVariable("id") int id){
+    public void deletePerson(@PathVariable("id") Integer id){
 
         personService.deletePerson(id);
     }
 
     @PutMapping(path = "/{id}")
-    public void updatePerson(@PathVariable("id") int id,
+    public void updatePerson(@PathVariable("id") Integer id,
                              @RequestParam(required = false) String name,
                              @RequestParam(required = false) String email){
         personService.updatePerson(id, name, email);
