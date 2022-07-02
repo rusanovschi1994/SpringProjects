@@ -9,17 +9,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final PasswordConfig passwordConfig;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SecurityConfig(PasswordConfig passwordConfig) {
-        this.passwordConfig = passwordConfig;
+    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -29,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*")
                 .permitAll()
+                .antMatchers("/api/**").hasRole(ApplicationUsersRole.STUDENT.name())
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -38,13 +40,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
-        UserDetails userCristian = User.builder()
+        UserDetails cristianUser = User.builder()
                 .username("cristian")
-                .password(passwordConfig.passwordEncoder().encode("cristian"))
-                .roles("ADMIN")
+                .password(passwordEncoder.encode("cristian"))
+                .roles(ApplicationUsersRole.ADMIN.name())
+                .build();
+
+        UserDetails lindaUser = User.builder()
+                .username("linda")
+                .password(passwordEncoder.encode("linda123"))
+                .roles(ApplicationUsersRole.STUDENT.name())
                 .build();
         return new InMemoryUserDetailsManager(
-                userCristian
+                cristianUser,
+                lindaUser
         );
     }
 }
