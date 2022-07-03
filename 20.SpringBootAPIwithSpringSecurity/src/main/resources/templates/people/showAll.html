@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Please sign out</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+
 </head>
 <body>
-
+<h1>List of people</h1>
 <div th:each="person : ${people}">
     <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()} + ', '+  ${person.getAge()}">user</a>
 </div>
-
+<div class="container">
+    <form class="form-signin" method="get" action="/people/new">
+        <button class="btn btn-primary btn-block" type="submit">Create new person</button>
+    </form>
+    <form class="form-signin" method="get" action="/logout">
+        <button class="btn btn-primary btn-block" type="submit">Logout</button>
+    </form>
+</div>
 <br/>
 <hr/>
-
-<a href="/people/new">Create new person</a>
-
 </body>
 </html>
