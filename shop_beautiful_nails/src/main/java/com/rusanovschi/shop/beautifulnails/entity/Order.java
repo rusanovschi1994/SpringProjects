@@ -1,91 +1,43 @@
 package com.rusanovschi.shop.beautifulnails.entity;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
-
+@Entity
+@Table(name = "order")
 public class Order {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer customerID;
-
-    private Integer serviceID;
-
+    @Column(name = "order_date")
     private LocalDate orderDate;
 
+    @Column(name = "order_time")
     private LocalTime orderTime;
 
+    @Column(name = "description")
     private String description;
 
+    @Column(name = "status")
     private Short status;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = 'order_service',
+            joinColumns = @JoinColumn("order_id"),
+            inverseJoinColumns = @JoinColumn("service_id")
+    )
+    private List<Service> services;
 
     public Order() {
     }
 
-    public Order(Integer customerID,
-                 Integer serviceID,
-                 LocalDate orderDate,
-                 LocalTime orderTime,
-                 String description,
-                 Short status) {
-        this.customerID = customerID;
-        this.serviceID = serviceID;
-        this.orderDate = orderDate;
-        this.orderTime = orderTime;
-        this.description = description;
-        this.status = status;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public Integer getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(Integer customerID) {
-        this.customerID = customerID;
-    }
-
-    public Integer getServiceID() {
-        return serviceID;
-    }
-
-    public void setServiceID(Integer serviceID) {
-        this.serviceID = serviceID;
-    }
-
-    public LocalDate getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(LocalDate orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public LocalTime getOrderTime() {
-        return orderTime;
-    }
-
-    public void setOrderTime(LocalTime orderTime) {
-        this.orderTime = orderTime;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Short getStatus() {
-        return status;
-    }
-
-    public void setStatus(Short status) {
-        this.status = status;
-    }
 }

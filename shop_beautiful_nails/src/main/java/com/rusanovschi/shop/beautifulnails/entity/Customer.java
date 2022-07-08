@@ -2,6 +2,7 @@ package com.rusanovschi.shop.beautifulnails.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -9,6 +10,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "first_name")
@@ -32,6 +34,10 @@ public class Customer {
     @Column(name = "enabled")
     private boolean enabled;
 
+    @OneToMany(cascade = CascadeType.ALL,
+                mappedBy = "customer")
+    private List<Order> orders;
+
     public Customer() {
 
     }
@@ -53,6 +59,7 @@ public class Customer {
         this.age = age;
         this.enabled = enabled;
     }
+
 
     public Integer getId() {
         return id;
@@ -112,5 +119,13 @@ public class Customer {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

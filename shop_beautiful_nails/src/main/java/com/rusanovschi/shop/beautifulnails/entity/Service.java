@@ -1,16 +1,37 @@
 package com.rusanovschi.shop.beautifulnails.entity;
 
+import net.bytebuddy.utility.nullability.MaybeNull;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "service")
 public class Service {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "price")
     private Integer price;
 
+    @Column(name = "duration")
     private Integer duration;
 
+    @Column(name = "enabled")
     private boolean enabled;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "order_service",
+            joinColumns = @JoinColumn("service_id"),
+            inverseJoinColumns = @JoinColumn("order_id")
+    )
+    private List<Order> orders;
 
     public Service() {
     }
@@ -57,5 +78,13 @@ public class Service {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }
