@@ -6,11 +6,12 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "order_date")
@@ -31,13 +32,68 @@ public class Order {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = 'order_service',
-            joinColumns = @JoinColumn("order_id"),
-            inverseJoinColumns = @JoinColumn("service_id")
+            name = "order_service",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "service_id")
     )
     private List<Service> services;
 
     public Order() {
     }
 
+    public Order(Integer id, LocalDate orderDate, LocalTime orderTime, String description, Short status) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.orderTime = orderTime;
+        this.description = description;
+        this.status = status;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public LocalDate getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public LocalTime getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(LocalTime orderTime) {
+        this.orderTime = orderTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Short getStatus() {
+        return status;
+    }
+
+    public void setStatus(Short status) {
+        this.status = status;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
 }

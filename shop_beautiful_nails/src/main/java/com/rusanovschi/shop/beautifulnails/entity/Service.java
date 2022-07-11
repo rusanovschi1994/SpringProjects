@@ -11,6 +11,7 @@ public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "name")
@@ -28,8 +29,8 @@ public class Service {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "order_service",
-            joinColumns = @JoinColumn("service_id"),
-            inverseJoinColumns = @JoinColumn("order_id")
+            joinColumns = @JoinColumn(name = "service_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
     )
     private List<Order> orders;
 
