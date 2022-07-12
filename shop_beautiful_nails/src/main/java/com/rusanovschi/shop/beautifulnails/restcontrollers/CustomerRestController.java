@@ -3,9 +3,7 @@ package com.rusanovschi.shop.beautifulnails.restcontrollers;
 import com.rusanovschi.shop.beautifulnails.entity.Customer;
 import com.rusanovschi.shop.beautifulnails.service.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,7 +11,7 @@ import java.util.List;
 @RequestMapping("/api/v1/customers")
 public class CustomerRestController {
 
-    private final CustomerServiceImpl customerService;
+    public final CustomerServiceImpl customerService;
 
     @Autowired
     public CustomerRestController(CustomerServiceImpl customerService) {
@@ -21,8 +19,34 @@ public class CustomerRestController {
     }
 
     @GetMapping
-    public List<Customer> getCustomer() {
+    public List<Customer> getCustomers() {
 
         return customerService.getCustomers();
+    }
+
+    @GetMapping(path = "/{id}")
+    public Customer getCustomer(@PathVariable("id") Integer id){
+
+        return customerService.getCustomer(id);
+    }
+
+    @PostMapping
+    public void addCustomer(@RequestBody Customer customer){
+
+        customerService.saveCustomer(customer);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public void deleteCustomer(@PathVariable("id") Integer id){
+
+        customerService.deleteCustomer(id);
+    }
+
+    @PutMapping(path = "/{id}")
+    public void updateCustomer(@PathVariable("id") Integer id,
+                               @RequestParam(required = false) String name,
+                               @RequestParam(required = false) String email){
+
+        customerService.updateCustomer(id, name, email);
     }
 }
