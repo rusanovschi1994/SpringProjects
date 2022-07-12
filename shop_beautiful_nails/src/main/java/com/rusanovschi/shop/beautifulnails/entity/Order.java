@@ -3,6 +3,7 @@ package com.rusanovschi.shop.beautifulnails.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -49,6 +50,14 @@ public class Order {
         this.status = status;
     }
 
+    public void addServiceToOrder(Service service){
+
+        if(services == null){
+            services = new ArrayList<>();
+        }
+        services.add(service);
+    }
+
     public Integer getId() {
         return id;
     }
@@ -89,11 +98,15 @@ public class Order {
         this.status = status;
     }
 
+    public List<Service> getServices() {
+        return services;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
 
-    public List<Service> getServices() {
-        return services;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
