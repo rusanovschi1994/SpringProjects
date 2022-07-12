@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl {
@@ -21,4 +23,68 @@ public class CustomerServiceImpl {
 
         return customerRepository.findAll();
     }
+
+    public Customer getCustomer(Integer id){
+
+        Customer customer = null;
+        Optional<Customer> optional = customerRepository.findById(id);
+        if(optional.isPresent()){
+
+            customer = optional.get();
+        }else{
+            throw new IllegalStateException("Customer with id="+id+" doesn't exist");
+        }
+
+        return customer;
+    }
+
+
+    public void saveCustomer(Customer customer){
+
+        Optional<Customer> optional = customerRepository.findCustomerByEmail(customer.getEmail());
+        if(optional.isPresent()){
+
+            throw new IllegalArgumentException ("email is taken");
+        }
+
+        customerRepository.save(customer);
+    }
+
+    public void deleteCustomer(Integer id){
+
+        boolean exists= customerRepository.existsById(id);
+
+        if(!exists){
+            throw new IllegalStateException("Customer with id="+id+" doesn't exist");
+        }
+
+        customerRepository.deleteById(id);
+    }
+
+    public void updateCustomer(Integer id, String name, String email){
+
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("Customer with id="+id+" doesn't exist"));
+
+        if(name != null &&
+            name.length() > 0 &&
+             !Objects.equals(customer.getFirstName(), name)){
+
+            customer.setFirstName(name);
+        }
+
+        if(email != null &&
+            email.length() > 0 &&
+             !Objects.equals(customer.getEmail(), email)){
+
+            Optional<Customer> optional = customerRepository.findCustomerByEmail(customer.getEmail());
+            if(optional.isPresent()){
+
+                throw new IllegalStateException("Customer with email="+email+" is registered");
+            }
+
+            customer.setEmail(email);
+        }
+    }
+
 }
