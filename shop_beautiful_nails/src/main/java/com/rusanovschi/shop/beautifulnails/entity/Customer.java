@@ -1,7 +1,12 @@
 package com.rusanovschi.shop.beautifulnails.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,7 +31,9 @@ public class Customer {
     private String email;
 
     @Column(name = "birth_date")
-    private LocalDate date;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dob;
 
     @Transient
     private Integer age;
@@ -47,7 +54,7 @@ public class Customer {
                     String lastName,
                     String phoneNumber,
                     String email,
-                    LocalDate date,
+                    LocalDate dob,
                     Integer age,
                     boolean enabled) {
         this.id = id;
@@ -55,9 +62,19 @@ public class Customer {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.date = date;
+        this.dob = dob;
         this.age = age;
         this.enabled = enabled;
+    }
+
+    public void addOrderToCustomer(Order order){
+
+        if(orders == null){
+            orders = new ArrayList<>();
+        }
+
+        orders.add(order);
+        order.setCustomer(this);
     }
 
 
@@ -97,20 +114,17 @@ public class Customer {
         this.email = email;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getDob() {
+        return dob;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
+    public Integer getAge()
+    {
+        return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
     public boolean isEnabled() {
