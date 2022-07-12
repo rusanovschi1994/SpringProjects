@@ -3,6 +3,7 @@ package com.rusanovschi.shop.beautifulnails.entity;
 import net.bytebuddy.utility.nullability.MaybeNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -43,6 +44,15 @@ public class Service {
         this.price = price;
         this.duration = duration;
         this.enabled = enabled;
+    }
+
+    public void addOrderToService(Order order){
+
+        if(orders == null){
+            orders = new ArrayList<>();
+        }
+
+        orders.add(order);
     }
 
     public Integer getId() {
