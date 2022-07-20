@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -19,18 +23,26 @@ public class Customer {
     private Integer id;
 
     @Column(name = "first_name", nullable = false)
+    @NotEmpty(message = "Name should not be empty ")
+    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String firstName;
 
     @Column(name = "last_name", nullable = false)
+    @NotEmpty(message = "Name should not be empty")
+    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String lastName;
 
     @Column(name = "phone", nullable = false)
+    @NotEmpty(message = "Phone number should not be empty")
+    @Min(value = 0, message = "Phone number should be greater than zero")
     private String phoneNumber;
 
     @Column(name = "email", unique = true)
+    @Email(message = "Email is not valid")
     private String email;
 
     @Column(name = "birth_date")
+    @NotEmpty(message = "Date of birthday should not be empty")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dob;

@@ -19,10 +19,10 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping
+    @GetMapping()
     public String getCustomers(Model model) {
 
         model.addAttribute("customers" , customerService.getCustomers());
-        return "getCustomers";
+        return "customer/getCustomers";
     }
 }
