@@ -27,14 +27,14 @@ public class Customer {
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "second_name", nullable = false)
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
-    private String lastName;
+    private String secondName;
 
     @Column(name = "phone", nullable = false)
     @NotEmpty(message = "Phone number should not be empty")
-    @Min(value = 0, message = "Phone number should be greater than zero")
+//    @Min(value = 0, message = "Phone number should be greater than zero")
     private String phoneNumber;
 
     @Column(name = "email", unique = true)
@@ -63,7 +63,7 @@ public class Customer {
 
     public Customer(Integer id,
                     String firstName,
-                    String lastName,
+                    String secondName,
                     String phoneNumber,
                     String email,
                     LocalDate dob,
@@ -71,7 +71,7 @@ public class Customer {
                     boolean enabled) {
         this.id = id;
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.secondName = secondName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.dob = dob;
@@ -102,12 +102,12 @@ public class Customer {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     public String getPhoneNumber() {
