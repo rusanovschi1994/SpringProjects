@@ -43,12 +43,8 @@ public class CustomerServiceImpl {
         Customer customer = null;
         Optional<Customer> optional = customerRepository.findCustomerByEmail(email);
 
-        if(optional.isPresent()){
-
+        if(optional.isPresent())
             customer = optional.get();
-        }else{
-            throw new IllegalStateException("Email is already taken");
-        }
 
         return customer;
     }
