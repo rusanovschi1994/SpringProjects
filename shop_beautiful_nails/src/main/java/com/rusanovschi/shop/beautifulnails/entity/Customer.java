@@ -5,8 +5,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.Period;
@@ -44,8 +44,13 @@ public class Customer {
     @Column(name = "birth_date")
     @NotEmpty(message = "Date of birthday should not be empty")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate dob;
+
+    //Moldova, Chisinau, 123456
+    @Column(name = "address")
+    @Pattern(regexp = "[A-Z]\\w, A-Z]\\w, \\d{6}]")
+    private String address;
 
     @Transient
     private Integer age;
@@ -67,6 +72,7 @@ public class Customer {
                     String phoneNumber,
                     String email,
                     LocalDate dob,
+                    String address,
                     Integer age,
                     boolean enabled) {
         this.id = id;
@@ -75,6 +81,7 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.dob = dob;
+        this.address = address;
         this.age = age;
         this.enabled = enabled;
     }
@@ -153,5 +160,13 @@ public class Customer {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
