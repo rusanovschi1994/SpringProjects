@@ -61,4 +61,11 @@ public class CustomerController {
         customerService.saveCustomer(customer);
         return "redirect:/customers";
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteCustomer(@PathVariable("id") Integer id){
+
+        customerService.deleteCustomer(id);
+        return "redirect:/customers";
+    }
 }
