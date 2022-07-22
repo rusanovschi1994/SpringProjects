@@ -59,7 +59,7 @@ public class CustomerController {
         }
 
         customerService.saveCustomer(customer);
-        return "redirect:/customers";
+        return "customer/registrationResult";
     }
 
     @DeleteMapping("/{id}")
