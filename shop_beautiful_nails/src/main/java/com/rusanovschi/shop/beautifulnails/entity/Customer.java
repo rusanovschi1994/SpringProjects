@@ -34,7 +34,6 @@ public class Customer {
 
     @Column(name = "phone", nullable = false)
     @NotEmpty(message = "Phone number should not be empty")
-//    @Min(value = 0, message = "Phone number should be greater than zero")
     private String phoneNumber;
 
     @Column(name = "email", unique = true)
@@ -42,14 +41,13 @@ public class Customer {
     private String email;
 
     @Column(name = "birth_date")
-    @NotEmpty(message = "Date of birthday should not be empty")
+//    @NotEmpty(message = "Date of birthday should not be empty")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate dob;
 
-    //Moldova, Chisinau, 123456
     @Column(name = "address")
-    @Pattern(regexp = "[A-Z]\\w, A-Z]\\w, \\d{6}]")
+    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "Address should be in this format: Country, City, Postal Code(6 characters)")
     private String address;
 
     @Transient
