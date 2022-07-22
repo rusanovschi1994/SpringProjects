@@ -62,6 +62,30 @@ public class CustomerController {
         return "customer/registrationResult";
     }
 
+    @GetMapping(path = "/{id}/edit")
+    public String editCustomer(Model model,
+                               @PathVariable("id") Integer id){
+
+        model.addAttribute("customer", customerService.getCustomer(id));
+        return "customer/editCustomer";
+    }
+
+    @PatchMapping(path = "/{id}")
+    public String updateCustomer(@ModelAttribute("customer") Customer customer,
+                                 @PathVariable("id") Integer id,
+                                 BindingResult bindingResult) {
+
+        customerValidator.validate(customer, bindingResult);
+
+        if(bindingResult.hasErrors()){
+            return "customer/editCustomer";
+        }
+
+        customerService.updateCustomer(id, customer.getFirstName(), customer.getEmail());
+
+        return "redirect:/customers";
+    }
+
     @DeleteMapping("/{id}")
     public String deleteCustomer(@PathVariable("id") Integer id){
 
