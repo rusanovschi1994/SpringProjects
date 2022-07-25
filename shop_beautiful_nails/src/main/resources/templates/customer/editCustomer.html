@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-8 mx-auto">
             <h2>Edit Customer</h2>
-            <form th:method="PATCH" th:action="@{/customers/{id}/(id=${customer.getId()})" th:object="${customer}">
+            <form th:method="PATCH" th:action="@{/customers/{id}/(id=${customer.getId()})}" th:object="${customer}">
                 <div class="form-row">
                     <div class="col-md-6 form-group">
                         <label for="firstName">First name</label>

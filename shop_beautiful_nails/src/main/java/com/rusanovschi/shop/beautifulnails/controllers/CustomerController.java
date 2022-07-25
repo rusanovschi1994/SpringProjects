@@ -71,7 +71,7 @@ public class CustomerController {
     }
 
     @PatchMapping(path = "/{id}")
-    public String updateCustomer(@ModelAttribute("customer") Customer customer,
+    public String updateCustomer(@ModelAttribute("customer") @Valid Customer customer,
                                  @PathVariable("id") Integer id,
                                  BindingResult bindingResult) {
 

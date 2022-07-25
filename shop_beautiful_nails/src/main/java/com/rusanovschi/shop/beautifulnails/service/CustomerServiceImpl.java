@@ -72,27 +72,27 @@ public class CustomerServiceImpl {
         customerRepository.deleteById(id);
     }
 
-    public void updateCustomer(Integer id, String name, String email){
+    public void updateCustomer(Integer id, String firstName, String email){
 
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Customer with id="+id+" doesn't exist"));
 
-        if(name != null &&
-            name.length() > 0 &&
-             !Objects.equals(customer.getFirstName(), name)){
+        if(firstName != null &&
+            firstName.length() > 0 &&
+             !Objects.equals(customer.getFirstName(), firstName)){
 
-            customer.setFirstName(name);
+            customer.setFirstName(firstName);
         }
 
         if(email != null &&
             email.length() > 0 &&
              !Objects.equals(customer.getEmail(), email)){
 
-            Optional<Customer> optional = customerRepository.findCustomerByEmail(customer.getEmail());
-            if(optional.isPresent()){
-
-                throw new IllegalStateException("Customer with email="+email+" is registered");
-            }
+//            Optional<Customer> optional = customerRepository.findCustomerByEmail(customer.getEmail());
+//            if(optional.isPresent()){
+//
+//                throw new IllegalStateException("Customer with email="+email+" is registered");
+//            }
 
             customer.setEmail(email);
         }
