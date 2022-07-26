@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Make VIP customer</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/vip/add}">
+    <label for="customer">Select the customer:</label>
+    <select th:object="${customer}"  th:field="*{id}"   id="customer">
+        <option th:each="customer : ${customer}" th:value="${customer.getId()}"
+                th:text="${customer.getFirstName()}"></option>
+    </select>
+
+    <input type="submit" value="Save"/>
+</form>
+
+</body>
+</html>
