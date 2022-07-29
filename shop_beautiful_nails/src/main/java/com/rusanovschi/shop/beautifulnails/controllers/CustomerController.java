@@ -2,7 +2,7 @@ package com.rusanovschi.shop.beautifulnails.controllers;
 
 
 import com.rusanovschi.shop.beautifulnails.entity.Customer;
-import com.rusanovschi.shop.beautifulnails.service.CustomerServiceImpl;
+import com.rusanovschi.shop.beautifulnails.service.CustomerService;
 import com.rusanovschi.shop.beautifulnails.util.CustomerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +16,12 @@ import javax.validation.Valid;
 @RequestMapping("/customers")
 public class CustomerController {
 
-    private final CustomerServiceImpl customerService;
+    private final CustomerService customerService;
 
     private final CustomerValidator customerValidator;
 
     @Autowired
-    public CustomerController(CustomerServiceImpl customerService, CustomerValidator customerValidator) {
+    public CustomerController(CustomerService customerService, CustomerValidator customerValidator) {
         this.customerService = customerService;
         this.customerValidator = customerValidator;
     }

@@ -1,7 +1,7 @@
 package com.rusanovschi.shop.beautifulnails.util;
 
 import com.rusanovschi.shop.beautifulnails.entity.Customer;
-import com.rusanovschi.shop.beautifulnails.service.CustomerServiceImpl;
+import com.rusanovschi.shop.beautifulnails.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -10,10 +10,10 @@ import org.springframework.validation.Validator;
 @Component
 public class CustomerValidator implements Validator {
 
-    private final CustomerServiceImpl customerService;
+    private final CustomerService customerService;
 
     @Autowired
-    public CustomerValidator(CustomerServiceImpl customerService) {
+    public CustomerValidator(CustomerService customerService) {
         this.customerService = customerService;
     }
 

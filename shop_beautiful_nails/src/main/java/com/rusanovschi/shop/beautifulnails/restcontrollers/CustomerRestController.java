@@ -1,7 +1,7 @@
 package com.rusanovschi.shop.beautifulnails.restcontrollers;
 
 import com.rusanovschi.shop.beautifulnails.entity.Customer;
-import com.rusanovschi.shop.beautifulnails.service.CustomerServiceImpl;
+import com.rusanovschi.shop.beautifulnails.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +11,10 @@ import java.util.List;
 @RequestMapping("/api/v1/customers")
 public class CustomerRestController {
 
-    public final CustomerServiceImpl customerService;
+    public final CustomerService customerService;
 
     @Autowired
-    public CustomerRestController(CustomerServiceImpl customerService) {
+    public CustomerRestController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
