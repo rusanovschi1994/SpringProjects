@@ -5,6 +5,7 @@ import com.rusanovschi.shop.beautifulnails.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -57,7 +58,8 @@ public class CustomerService {
 
             throw new IllegalArgumentException ("email is taken");
         }
-
+        customer.setCreatedAt(new Date());
+        customer.setEnabled(true);
         customerRepository.save(customer);
     }
 

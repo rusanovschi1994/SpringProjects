@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -40,11 +41,18 @@ public class Customer {
     @Email(message = "Email is not valid")
     private String email;
 
+//    @Column(name = "birth_date")
+//    @Temporal(TemporalType.DATE)
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+//    private Date dob;
     @Column(name = "birth_date")
-//    @NotEmpty(message = "Date of birthday should not be empty")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate dob;
+
+
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
     @Column(name = "address")
     @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "Address should be in this format: Country, City, Postal Code(6 characters)")
@@ -72,6 +80,7 @@ public class Customer {
                     LocalDate dob,
                     String address,
                     Integer age,
+                    Date createdAt,
                     boolean enabled) {
         this.id = id;
         this.firstName = firstName;
@@ -81,6 +90,7 @@ public class Customer {
         this.dob = dob;
         this.address = address;
         this.age = age;
+        this.createdAt = createdAt;
         this.enabled = enabled;
     }
 
@@ -137,6 +147,14 @@ public class Customer {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Integer getAge()
