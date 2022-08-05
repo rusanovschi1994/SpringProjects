@@ -29,7 +29,7 @@ public class User {
 
     @Column(name = "username")
     @Email(message = "Email is not valid")
-    private String username;
+    private String email;
 
     @Column(name = "password")
     @Size(min = 3, message = "Password should have 3 minim characters")
@@ -48,14 +48,14 @@ public class User {
     public User(Integer id,
                 String firstName,
                 String secondName,
-                String username,
+                String email,
                 String password,
                 boolean isEnabled,
                 Date createdAt) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
-        this.username = username;
+        this.email = email;
         this.password = password;
         this.isEnabled = isEnabled;
         this.createdAt = createdAt;
@@ -85,12 +85,12 @@ public class User {
         this.secondName = secondName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -115,5 +115,18 @@ public class User {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", isEnabled=" + isEnabled +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }

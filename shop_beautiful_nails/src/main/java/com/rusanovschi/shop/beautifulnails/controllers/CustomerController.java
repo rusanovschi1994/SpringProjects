@@ -2,9 +2,13 @@ package com.rusanovschi.shop.beautifulnails.controllers;
 
 
 import com.rusanovschi.shop.beautifulnails.entity.Customer;
+import com.rusanovschi.shop.beautifulnails.security.OurUserDetails;
 import com.rusanovschi.shop.beautifulnails.service.CustomerService;
 import com.rusanovschi.shop.beautifulnails.util.CustomerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,6 +48,9 @@ public class CustomerController {
     public String newCustomer(Model model){
 
         model.addAttribute("customer", new Customer());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        OurUserDetails ourUserDetails = (OurUserDetails) authentication.getPrincipal();
+        System.out.println(ourUserDetails.getUser());
         return "customer/newCustomer";
     }
 
