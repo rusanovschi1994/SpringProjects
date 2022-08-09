@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/auth/login", "/error").permitAll()
+                    .antMatchers("/", "/auth/login", "/error").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -43,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureUrl("/auth/login?error")
                     .and()
                 .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/auth/login")
                     .permitAll();
     }
 
