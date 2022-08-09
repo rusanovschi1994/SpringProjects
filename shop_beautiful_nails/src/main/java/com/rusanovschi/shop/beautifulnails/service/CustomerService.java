@@ -4,6 +4,7 @@ import com.rusanovschi.shop.beautifulnails.entity.Customer;
 import com.rusanovschi.shop.beautifulnails.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
@@ -50,7 +52,7 @@ public class CustomerService {
         return customer;
     }
 
-
+    @Transactional
     public void saveCustomer(Customer customer){
 
         Optional<Customer> optional = customerRepository.findCustomerByEmail(customer.getEmail());
@@ -63,6 +65,7 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
+    @Transactional
     public void deleteCustomer(Integer id){
 
         boolean exists= customerRepository.existsById(id);
@@ -74,6 +77,7 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
+    @Transactional
     public void updateCustomer(Integer id, String firstName, String email){
 
         Customer customer = customerRepository.findById(id)
