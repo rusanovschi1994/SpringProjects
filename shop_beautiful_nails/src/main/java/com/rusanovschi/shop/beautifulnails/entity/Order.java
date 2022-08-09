@@ -1,5 +1,7 @@
 package com.rusanovschi.shop.beautifulnails.entity;
 
+import com.rusanovschi.shop.beautifulnails.util.OrderStatus;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -25,7 +27,8 @@ public class Order {
     private String description;
 
     @Column(name = "status")
-    private Short status;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
@@ -42,12 +45,13 @@ public class Order {
     public Order() {
     }
 
-    public Order(Integer id, LocalDate orderDate, LocalTime orderTime, String description, Short status) {
+    public Order(Integer id, LocalDate orderDate, LocalTime orderTime, String description, OrderStatus status, Customer customer) {
         this.id = id;
         this.orderDate = orderDate;
         this.orderTime = orderTime;
         this.description = description;
         this.status = status;
+        this.customer = customer;
     }
 
     public void addServiceToOrder(Service service){
@@ -90,11 +94,11 @@ public class Order {
         this.description = description;
     }
 
-    public Short getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Short status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 
