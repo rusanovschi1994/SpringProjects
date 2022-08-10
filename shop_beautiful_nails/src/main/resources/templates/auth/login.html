@@ -10,11 +10,15 @@
 </head>
 <body>
 <div class="container-fluid text-center">
+
     <div>
        <br/>
        <br/>
     </div>
+
     <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
+
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
         <div th:if="${param.error}">
             <p class="text-danger">Invalid email or password</p>
