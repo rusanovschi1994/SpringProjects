@@ -35,6 +35,9 @@ public class User {
     @Size(min = 3, message = "Password should have 3 minim characters")
     private String password;
 
+    @Column(name = "role")
+    private String role;
+
     @Column(name = "enabled")
     private boolean isEnabled;
 
@@ -50,6 +53,7 @@ public class User {
                 String secondName,
                 String username,
                 String password,
+                String role,
                 boolean isEnabled,
                 Date createdAt) {
         this.id = id;
@@ -57,6 +61,7 @@ public class User {
         this.secondName = secondName;
         this.username = username;
         this.password = password;
+        this.role = role;
         this.isEnabled = isEnabled;
         this.createdAt = createdAt;
     }
@@ -99,6 +104,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public boolean isEnabled() {
