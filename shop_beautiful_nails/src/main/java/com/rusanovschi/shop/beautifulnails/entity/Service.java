@@ -3,6 +3,7 @@ package com.rusanovschi.shop.beautifulnails.entity;
 import net.bytebuddy.utility.nullability.MaybeNull;
 
 import javax.persistence.*;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class Service {
     private Integer price;
 
     @Column(name = "duration")
-    private Integer duration;
+    private Duration duration;
 
     @Column(name = "enabled")
     private boolean enabled;
@@ -38,7 +39,7 @@ public class Service {
     public Service() {
     }
 
-    public Service(Integer id, String name, Integer price, Integer duration, boolean enabled) {
+    public Service(Integer id, String name, Integer price, Duration duration, boolean enabled) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -75,11 +76,11 @@ public class Service {
         this.price = price;
     }
 
-    public Integer getDuration() {
+    public Duration getDuration() {
         return duration;
     }
 
-    public void setDuration(Integer duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
     }
 
