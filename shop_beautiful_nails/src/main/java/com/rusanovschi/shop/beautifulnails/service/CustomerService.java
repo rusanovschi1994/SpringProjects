@@ -3,6 +3,7 @@ package com.rusanovschi.shop.beautifulnails.service;
 import com.rusanovschi.shop.beautifulnails.entity.Customer;
 import com.rusanovschi.shop.beautifulnails.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Customer> getCustomers(){
 
         return customerRepository.findAll();
