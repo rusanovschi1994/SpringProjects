@@ -2,6 +2,7 @@ package com.rusanovschi.shop.beautifulnails.service;
 
 import com.rusanovschi.shop.beautifulnails.entity.Customer;
 import com.rusanovschi.shop.beautifulnails.repository.CustomerRepository;
+import com.rusanovschi.shop.beautifulnails.util.restError.CustomerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class CustomerService {
 
             customer = optional.get();
         }else{
-            throw new IllegalStateException("Customer with id="+id+" doesn't exist");
+            throw new CustomerNotFoundException();
         }
 
         return customer;
