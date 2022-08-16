@@ -24,7 +24,7 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Customer> getCustomers(){
 
         return customerRepository.findAll();
