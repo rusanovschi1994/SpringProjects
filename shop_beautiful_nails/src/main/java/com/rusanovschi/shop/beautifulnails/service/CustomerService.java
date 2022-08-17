@@ -63,8 +63,7 @@ public class CustomerService {
 
             throw new IllegalArgumentException ("email is taken");
         }
-        customer.setCreatedAt(new Date());
-        customer.setEnabled(true);
+        enrichCustomer(customer);
         customerRepository.save(customer);
     }
 
@@ -105,5 +104,11 @@ public class CustomerService {
 
             customer.setEmail(email);
         }
+    }
+
+    private void enrichCustomer(Customer customer){
+
+        customer.setCreatedAt(new Date());
+        customer.setEnabled(true);
     }
 }

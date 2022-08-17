@@ -1,10 +1,12 @@
 package com.rusanovschi.shop.beautifulnails.restcontrollers;
 
+import com.rusanovschi.shop.beautifulnails.dto.CustomerDTO;
 import com.rusanovschi.shop.beautifulnails.entity.Customer;
 import com.rusanovschi.shop.beautifulnails.service.CustomerService;
 import com.rusanovschi.shop.beautifulnails.util.restError.CustomerErrorResponse;
 import com.rusanovschi.shop.beautifulnails.util.restError.CustomerNotCreatedException;
 import com.rusanovschi.shop.beautifulnails.util.restError.CustomerNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,33 +15,38 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v2/customers")
 public class CustomerRestController2 {
 
     private final CustomerService customerService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public CustomerRestController2(CustomerService customerService) {
+    public CustomerRestController2(CustomerService customerService, ModelMapper modelMapper) {
         this.customerService = customerService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping
-    public List<Customer> getCustomers(){
+    public List<CustomerDTO> getCustomers(){
 
-        return customerService.getCustomers();
+        return customerService.getCustomers().stream().map(this::convertToCustomer)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public Customer getCustomer(@PathVariable("id") Integer id){
+    public CustomerDTO getCustomer(@PathVariable("id") Integer id){
 
-        return customerService.getCustomer(id);
+        return convertToCustomer(customerService.getCustomer(id));
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addCustomer(@RequestBody @Valid Customer customer,
+    public ResponseEntity<HttpStatus> addCustomer(@RequestBody @Valid CustomerDTO customerDTO,
                                                   BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
@@ -58,7 +65,7 @@ public class CustomerRestController2 {
             throw new CustomerNotCreatedException(errorMsg.toString());
         }
 
-        customerService.saveCustomer(customer);
+        customerService.saveCustomer(convertToPerson(customerDTO));
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -100,5 +107,13 @@ public class CustomerRestController2 {
         );
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    private Customer convertToPerson(CustomerDTO customerDTO) {
+        return modelMapper.map(customerDTO, Customer.class);
+    }
+
+    private CustomerDTO convertToCustomer(Customer customer){
+        return modelMapper.map(customer, CustomerDTO.class);
     }
 }
