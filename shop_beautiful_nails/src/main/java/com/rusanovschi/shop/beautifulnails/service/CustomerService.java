@@ -74,7 +74,7 @@ public class CustomerService {
         boolean exists= customerRepository.existsById(id);
 
         if(!exists){
-            throw new IllegalStateException("Customer with id="+id+" doesn't exist");
+            throw new CustomerNotFoundException();
         }
 
         customerRepository.deleteById(id);
@@ -84,7 +84,7 @@ public class CustomerService {
     public void updateCustomer(Integer id, String firstName, String email){
 
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("Customer with id="+id+" doesn't exist"));
+                .orElseThrow(() -> new CustomerNotFoundException());
 
         if(firstName != null &&
             firstName.length() > 0 &&

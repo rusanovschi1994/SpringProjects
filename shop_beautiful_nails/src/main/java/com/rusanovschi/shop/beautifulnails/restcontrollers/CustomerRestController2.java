@@ -62,6 +62,24 @@ public class CustomerRestController2 {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<HttpStatus> removeCustomer(@PathVariable("id") Integer id){
+
+        customerService.deleteCustomer(id);
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<HttpStatus> updateCustomer(@PathVariable("id") Integer id,
+                                                     @RequestParam(required = false) String firstName,
+                                                     @RequestParam(required = false) String email){
+
+        customerService.updateCustomer(id, firstName, email);
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
     @ExceptionHandler
     private ResponseEntity<CustomerErrorResponse> handlerException(CustomerNotFoundException exception){
 
