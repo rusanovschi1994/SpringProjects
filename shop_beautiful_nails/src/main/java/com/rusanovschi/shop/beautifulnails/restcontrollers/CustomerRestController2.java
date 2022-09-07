@@ -15,7 +15,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +26,8 @@ public class CustomerRestController2 {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public CustomerRestController2(CustomerService customerService, ModelMapper modelMapper) {
+    public CustomerRestController2(CustomerService customerService,
+                                   ModelMapper modelMapper) {
         this.customerService = customerService;
         this.modelMapper = modelMapper;
     }
@@ -35,14 +35,14 @@ public class CustomerRestController2 {
     @GetMapping
     public List<CustomerDTO> getCustomers(){
 
-        return customerService.getCustomers().stream().map(this::convertToCustomer)
+        return customerService.getCustomers().stream().map(this::convertToCustomerDTO)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public CustomerDTO getCustomer(@PathVariable("id") Integer id){
 
-        return convertToCustomer(customerService.getCustomer(id));
+        return convertToCustomerDTO(customerService.getCustomer(id));
     }
 
     @PostMapping
@@ -65,7 +65,7 @@ public class CustomerRestController2 {
             throw new CustomerNotCreatedException(errorMsg.toString());
         }
 
-        customerService.saveCustomer(convertToPerson(customerDTO));
+        customerService.saveCustomer(convertToCustomer(customerDTO));
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -109,11 +109,11 @@ public class CustomerRestController2 {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    private Customer convertToPerson(CustomerDTO customerDTO) {
+    public Customer convertToCustomer(CustomerDTO customerDTO){
         return modelMapper.map(customerDTO, Customer.class);
     }
 
-    private CustomerDTO convertToCustomer(Customer customer){
+    public CustomerDTO convertToCustomerDTO(Customer customer){
         return modelMapper.map(customer, CustomerDTO.class);
     }
 }

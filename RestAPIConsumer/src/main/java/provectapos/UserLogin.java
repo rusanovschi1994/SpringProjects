@@ -54,7 +54,9 @@ public class UserLogin {
                      builder
                              .append(node.findValues("Name"))
                              .append(" - ")
-                             .append(node.findValues("Price"));
+                             .append(node.findValues("Price"))
+                             .append(" - ")
+                             .append(node.findValues("ArticleMeasureType")) ;
                      System.out.println(builder);
 
 //                 String st = node.findValues("Name").toString();
