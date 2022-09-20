@@ -68,4 +68,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         return new BCryptPasswordEncoder();
     }
+
+    //AuthentificationManager help to check if username and password is correctly
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+
+        return super.authenticationManagerBean();
+    }
 }

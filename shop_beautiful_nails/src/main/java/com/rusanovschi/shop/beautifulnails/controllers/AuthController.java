@@ -14,6 +14,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,6 +69,22 @@ public class AuthController {
         registrationService.save(user);
 
         String token = jwtUtil.generateToken(userDTO.getUsername());
+        return Map.of("jwt-token", token);
+    }
+
+    @PostMapping("/login")
+    public Map<String, String> performLogin(@RequestBody AuthentificationDTO authentificationDTO){
+
+        UsernamePasswordAuthenticationToken authInputToken =
+                new UsernamePasswordAuthenticationToken(authentificationDTO.getUsername(),
+                        authentificationDTO.getPassword());
+        try {
+            authenticationManager.authenticate(authInputToken);
+        }catch (BadCredentialsException e){
+            return Map.of("message", "Incorrect credentials!");
+        }
+
+        String token = jwtUtil.generateToken(authentificationDTO.getUsername());
         return Map.of("jwt-token", token);
     }
 
