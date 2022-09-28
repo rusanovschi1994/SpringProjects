@@ -3,7 +3,7 @@ package com.rusanovschi.shop.beautifulnails.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
-public class AuthentificationDTO {
+public class AuthenticationDTO {
 
     @Email(message = "Email is not valid")
     private String username;

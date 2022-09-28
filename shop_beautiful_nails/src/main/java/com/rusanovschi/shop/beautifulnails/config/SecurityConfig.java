@@ -40,7 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .csrf().disable()
                 .authorizeRequests()
                     .antMatchers( "/api/v2/**","/auth/login","/auth/registration", "/logout", "/error").permitAll()
                     .anyRequest().hasAnyRole("USER", "ADMIN")
@@ -54,13 +53,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/auth/login")
-                    .permitAll()
-                    .and()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                    .permitAll();
 
-        //added http for JWTFilter
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+//uncomment below code for using jwtSecurityConfig
+
+//                    .and()
+//                    .sessionManagement()
+//                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//
+//        //added http for JWTFilter
+//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
     }
 
     @Bean
@@ -69,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    //AuthentificationManager help to check if username and password is correctly
+    //AuthenticationManager help to check if username and password is correctly
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
